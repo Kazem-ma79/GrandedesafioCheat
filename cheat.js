@@ -1,7 +1,9 @@
 const {app, BrowserWindow, dialog} = require('electron');
 
 let mainWindow;
-var code = '$("#name").val("A");$("#start").click();$(".correct").click();';
+let name = '';
+let url = '';
+var code = '$("#name").val("' + name + '");$("#start").click();$(".correct").click();';
 app.on('window-all-closed', function() {
   app.quit();
 });
@@ -9,7 +11,7 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
 
   mainWindow = new BrowserWindow({width: 1024, height: 768 });
-  mainWindow.loadURL('https://grandedesafio.com/quiz/');
+  mainWindow.loadURL(url);
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.executeJavaScript(code);
     const options = {
